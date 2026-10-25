@@ -1,0 +1,196 @@
+<Window x:Class="Apathy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:m="clr-namespace:Apathy.Models"
+        Title="apathy"
+        Icon="/apathy;component/app.ico"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource Sk.Outline}"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
+        TextOptions.TextFormattingMode="Display"
+        FontFamily="{StaticResource Sk.Font}"
+        FontSize="{StaticResource Sk.FontSize}"
+        Foreground="{StaticResource Sk.Text}">
+
+    <!-- Same frame as the apathy menu: 1px outline, 1px light, 4px mid, 1px light. -->
+    <Border x:Name="Root" Width="760" Height="580"
+            LayoutTransform="{DynamicResource Sk.Scale}"
+            BorderBrush="{StaticResource Sk.Outline}" BorderThickness="1">
+        <Border BorderBrush="{StaticResource Sk.Frame.Light}" BorderThickness="1">
+            <Border BorderBrush="{StaticResource Sk.Frame.Mid}" BorderThickness="4">
+                <Border BorderBrush="{StaticResource Sk.Frame.Light}" BorderThickness="1">
+                    <Grid Background="{StaticResource Sk.Black}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1"/>
+                            <RowDefinition Height="1"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" Background="{StaticResource Sk.Rainbow}"/>
+                        <Border Grid.Row="1" Background="{StaticResource Sk.Rainbow}" Opacity="0.5"/>
+
+                        <!-- Category tabs are added in code from programs.json, in front of this one. -->
+                        <TabControl x:Name="MainTabs" Grid.Row="2">
+                            <TabItem x:Name="InstallTab" Header="&#xE896;" ToolTip="Install"
+                                     AutomationProperties.Name="Install">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="18"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="18"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="18"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <GroupBox x:Name="SelectedGroup" Header="Selected programs">
+                                            <StackPanel>
+                                                <TextBlock x:Name="NothingSelected" Style="{StaticResource Sk.Label}"
+                                                           Foreground="{StaticResource Sk.TextMuted}" TextWrapping="Wrap"
+                                                           Margin="20,0,30,6"
+                                                           Text="Nothing selected yet. Pick programs in the tabs on the left."/>
+                                                <ItemsControl x:Name="SelectedList">
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate DataType="{x:Type m:AppItem}">
+                                                            <Grid Margin="20,0,30,5">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition/>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
+                                                                <!-- MouseDown, not Up: the window starts a drag on MouseDown and swallows the Up. -->
+                                                                <TextBlock x:Name="Version" Grid.Column="1" Margin="8,0,0,0"
+                                                                           Text="{Binding VersionText}" Cursor="Hand"
+                                                                           Foreground="{StaticResource Sk.TextMuted}"
+                                                                           ToolTip="Pick a version"
+                                                                           MouseLeftButtonDown="Version_MouseDown"/>
+                                                                <TextBlock x:Name="State" Grid.Column="2" Margin="8,0,0,0"
+                                                                           Text="{Binding StateText}"
+                                                                           Foreground="{StaticResource Sk.TextMuted}"/>
+                                                            </Grid>
+                                                            <DataTemplate.Triggers>
+                                                                <DataTrigger Binding="{Binding CanPickVersion}" Value="False">
+                                                                    <Setter TargetName="Version" Property="Visibility" Value="Collapsed"/>
+                                                                </DataTrigger>
+                                                                <Trigger SourceName="Version" Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="Version" Property="Foreground" Value="{StaticResource Sk.Text}"/>
+                                                                </Trigger>
+                                                                <DataTrigger Binding="{Binding State}" Value="Saved">
+                                                                    <Setter TargetName="State" Property="Foreground" Value="{DynamicResource Sk.Accent}"/>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding State}" Value="Working">
+                                                                    <Setter TargetName="State" Property="Foreground" Value="{StaticResource Sk.Text}"/>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding State}" Value="Done">
+                                                                    <Setter TargetName="State" Property="Foreground" Value="{DynamicResource Sk.Accent}"/>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding State}" Value="Failed">
+                                                                    <Setter TargetName="State" Property="Foreground" Value="{StaticResource Sk.TextError}"/>
+                                                                </DataTrigger>
+                                                            </DataTemplate.Triggers>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </StackPanel>
+                                        </GroupBox>
+
+                                        <GroupBox Grid.Row="2" Header="Quick select">
+                                            <StackPanel>
+                                                <TextBlock Style="{StaticResource Sk.Label}" TextWrapping="Wrap" Margin="20,0,30,6"
+                                                           Foreground="{StaticResource Sk.TextMuted}"
+                                                           Text="Recommended are the basics every PC needs."/>
+                                                <Button x:Name="RecommendedButton" Content="Select recommended" Click="Recommended_Click"/>
+                                                <Button x:Name="ClearButton" Content="Clear selection" Click="Clear_Click"/>
+                                            </StackPanel>
+                                        </GroupBox>
+
+                                        <GroupBox Grid.Row="4" Header="Support us">
+                                            <StackPanel>
+                                                <TextBlock Style="{StaticResource Sk.Label}" TextWrapping="Wrap" Margin="20,0,30,6"
+                                                           Foreground="{StaticResource Sk.TextMuted}"
+                                                           Text="Support us here: join the apathy Discord."/>
+                                                <Button x:Name="DiscordButton" Click="Discord_Click" Cursor="Hand"
+                                                        ToolTip="https://discord.com/invite/apathy">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Path Width="16" Height="16" Stretch="Uniform" Fill="#5865F2"
+                                                              Margin="0,0,7,0" VerticalAlignment="Center"
+                                                              Data="M 20.317 4.3698 a 19.7913 19.7913 0 0 0 -4.8851 -1.5152 0.0741 0.0741 0 0 0 -0.0785 0.0371 c -0.211 0.3753 -0.4447 0.8648 -0.6083 1.2495 -1.8447 -0.2762 -3.68 -0.2762 -5.4868 0 -0.1636 -0.3933 -0.4058 -0.8742 -0.6177 -1.2495 a 0.077 0.077 0 0 0 -0.0785 -0.037 19.7363 19.7363 0 0 0 -4.8852 1.515 0.0699 0.0699 0 0 0 -0.0321 0.0277 C 0.5334 9.0458 -0.319 13.5799 0.0992 18.0578 a 0.0824 0.0824 0 0 0 0.0312 0.0561 c 2.0528 1.5076 4.0413 2.4228 5.9929 3.0294 a 0.0777 0.0777 0 0 0 0.0842 -0.0276 c 0.4616 -0.6304 0.8731 -1.2952 1.226 -1.9942 a 0.076 0.076 0 0 0 -0.0416 -0.1057 c -0.6528 -0.2476 -1.2743 -0.5495 -1.8722 -0.8923 a 0.077 0.077 0 0 1 -0.0076 -0.1277 c 0.1258 -0.0943 0.2517 -0.1923 0.3718 -0.2914 a 0.0743 0.0743 0 0 1 0.0776 -0.0105 c 3.9278 1.7933 8.18 1.7933 12.0614 0 a 0.0739 0.0739 0 0 1 0.0785 0.0095 c 0.1202 0.099 0.246 0.1981 0.3728 0.2924 a 0.077 0.077 0 0 1 -0.0066 0.1276 12.2986 12.2986 0 0 1 -1.873 0.8914 0.0766 0.0766 0 0 0 -0.0407 0.1067 c 0.3604 0.698 0.7719 1.3628 1.225 1.9932 a 0.076 0.076 0 0 0 0.0842 0.0286 c 1.961 -0.6067 3.9495 -1.5219 6.0023 -3.0294 a 0.077 0.077 0 0 0 0.0313 -0.0552 c 0.5004 -5.177 -0.8382 -9.6739 -3.5485 -13.6604 a 0.061 0.061 0 0 0 -0.0312 -0.0286 z M 8.02 15.3312 c -1.1825 0 -2.1569 -1.0857 -2.1569 -2.419 0 -1.3332 0.9555 -2.4189 2.157 -2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332 -0.9555 2.4189 -2.1569 2.4189 z m 7.9748 0 c -1.1825 0 -2.1569 -1.0857 -2.1569 -2.419 0 -1.3332 0.9554 -2.4189 2.1569 -2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332 -0.946 2.4189 -2.1568 2.4189 Z"/>
+                                                        <TextBlock Text="Join our Discord" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Button>
+                                            </StackPanel>
+                                        </GroupBox>
+                                    </Grid>
+
+                                    <Grid Grid.Column="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="18"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <GroupBox Header="Install">
+                                            <StackPanel>
+                                                <TextBlock x:Name="StatusText" Style="{StaticResource Sk.Label}" Margin="20,0,30,3"
+                                                           TextTrimming="CharacterEllipsis" Text="Ready."/>
+                                                <TextBlock x:Name="DetailText" Style="{StaticResource Sk.Label}" Margin="20,0,30,5"
+                                                           TextTrimming="CharacterEllipsis" FontSize="10"
+                                                           Foreground="{StaticResource Sk.TextMuted}" Text=" "/>
+                                                <!-- progress bar drawn like the apathy slider -->
+                                                <Border x:Name="ProgressTrack" Height="7" Margin="20,0,30,10"
+                                                        BorderBrush="{StaticResource Sk.Black}" BorderThickness="1"
+                                                        Background="{StaticResource Sk.Slider.Track}">
+                                                    <Border x:Name="ProgressFill" HorizontalAlignment="Left" Width="0"
+                                                            Background="{DynamicResource Sk.Accent.Gradient}"/>
+                                                </Border>
+                                                <CheckBox x:Name="FastDownloadsBox" Content="Fast downloads" IsChecked="True"
+                                                          Margin="20,0,30,8"
+                                                          ToolTip="Downloads directly instead of through Windows Delivery Optimization, which is often much slower"/>
+                                                <Button x:Name="InstallButton" Content="Install selected" Click="Install_Click"/>
+                                                <Button x:Name="DownloadButton" Content="Download installers to folder" Click="Download_Click"
+                                                        ToolTip="Saves the installers, e.g. to a USB drive, to install them later without internet"/>
+                                                <Button x:Name="UpgradeButton" Content="Update everything on this PC" Click="Upgrade_Click"
+                                                        ToolTip="Updates all programs installed on this computer"/>
+                                                <Button x:Name="StopButton" Content="Stop" Click="Stop_Click" IsEnabled="False"/>
+                                                <Button x:Name="CloseButton" Content="Close" Click="Close_Click"/>
+                                            </StackPanel>
+                                        </GroupBox>
+
+                                        <GroupBox x:Name="LogGroup" Grid.Row="2" Header="Log">
+                                            <TextBlock x:Name="LogText" Margin="8,0,8,4" TextWrapping="Wrap"
+                                                       FontFamily="Consolas" Foreground="{StaticResource Sk.TextMuted}"/>
+                                        </GroupBox>
+                                    </Grid>
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
+
+                        <Thumb x:Name="ResizeGrip" Grid.Row="2" Width="10" Height="10"
+                               HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                               Cursor="SizeNWSE" DragDelta="ResizeGrip_DragDelta">
+                            <Thumb.Template>
+                                <ControlTemplate TargetType="Thumb">
+                                    <Border Background="Transparent">
+                                        <Path Fill="{StaticResource Sk.Frame.Light}" RenderOptions.EdgeMode="Aliased"
+                                              Data="M7,1 h2 v2 h-2 Z M4,4 h2 v2 h-2 Z M7,4 h2 v2 h-2 Z M1,7 h2 v2 h-2 Z M4,7 h2 v2 h-2 Z M7,7 h2 v2 h-2 Z"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Thumb.Template>
+                        </Thumb>
+                    </Grid>
+                </Border>
+            </Border>
+        </Border>
+    </Border>
+</Window>

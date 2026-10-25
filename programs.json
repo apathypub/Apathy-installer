@@ -1,0 +1,203 @@
+[
+  { "category": "Essentials", "icon": "E80F", "groups": [
+    { "name": "Browsers", "programs": [
+      { "name": "Google Chrome", "id": "Google.Chrome", "recommended": true },
+      { "name": "Mozilla Firefox", "id": "Mozilla.Firefox" },
+      { "name": "Brave", "id": "Brave.Brave" },
+      { "name": "Opera", "id": "Opera.Opera" },
+      { "name": "Opera GX", "id": "Opera.OperaGX" },
+      { "name": "Vivaldi", "id": "Vivaldi.Vivaldi" }
+    ]},
+    { "name": "Archives & files", "programs": [
+      { "name": "7-Zip", "id": "7zip.7zip", "recommended": true },
+      { "name": "WinRAR", "id": "RARLab.WinRAR" },
+      { "name": "Everything", "id": "voidtools.Everything" },
+      { "name": "Adobe Acrobat Reader", "id": "Adobe.Acrobat.Reader.64-bit" },
+      { "name": "SumatraPDF", "id": "SumatraPDF.SumatraPDF" }
+    ]},
+    { "name": "Runtimes", "programs": [
+      { "name": "Visual C++ 2015-2022 x64", "id": "Microsoft.VCRedist.2015+.x64", "recommended": true },
+      { "name": "Visual C++ 2015-2022 x86", "id": "Microsoft.VCRedist.2015+.x86", "recommended": true },
+      { "name": ".NET Desktop Runtime 8", "id": "Microsoft.DotNet.DesktopRuntime.8" },
+      { "name": "DirectX", "id": "Microsoft.DirectX" },
+      { "name": "Java (JRE)", "id": "Oracle.JavaRuntimeEnvironment" }
+    ]}
+  ]},
+  { "category": "Drivers", "icon": "E950", "hardware": true, "groups": [
+    { "name": "Graphics card", "programs": [
+      { "name": "NVIDIA app (GeForce drivers)", "id": "NVIDIA.App", "detect": ["gpu:nvidia"],
+        "page": "https://www.nvidia.com/en-us/software/nvidia-app/",
+        "find": ["https://[a-z0-9.-]+\\.nvidia\\.com/nvapp/client/[\\d.]+/NVIDIA_app_v[\\d.]+\\.exe"],
+        "url": "https://www.nvidia.com/en-us/software/nvidia-app/" },
+      { "name": "AMD Adrenalin (auto-detects graphics + chipset)", "id": "AMD.AutoDetect", "detect": ["gpu:amd", "gpu:radeon"],
+        "page": "https://www.amd.com/en/support/download/drivers.html",
+        "find": ["https://drivers\\.amd\\.com/drivers/installer/[^\"'\\s<>]+minimalsetup[^\"'\\s<>]+\\.exe"],
+        "url": "https://www.amd.com/en/support/download/drivers.html" },
+      { "name": "Intel Arc / Iris graphics (Intel DSA)", "id": "Intel.IntelDriverAndSupportAssistant", "detect": ["gpu:intel"] },
+      { "name": "DDU (remove old GPU drivers)", "id": "Wagnardsoft.DisplayDriverUninstaller" }
+    ]},
+    { "name": "Processor & chipset", "programs": [
+      { "name": "Intel Driver & Support Assistant", "id": "Intel.IntelDriverAndSupportAssistant", "detect": ["cpu:intel"] },
+      { "name": "AMD Ryzen chipset (AMD auto-detect tool)", "id": "AMD.AutoDetect", "detect": ["cpu:amd"],
+        "page": "https://www.amd.com/en/support/download/drivers.html",
+        "find": ["https://drivers\\.amd\\.com/drivers/installer/[^\"'\\s<>]+minimalsetup[^\"'\\s<>]+\\.exe"],
+        "url": "https://www.amd.com/en/support/download/drivers.html" }
+    ]},
+    { "name": "Motherboard", "programs": [
+      { "name": "ASUS Armoury Crate", "id": "Asus.ArmouryCrate", "detect": ["board:asus"] },
+      { "name": "MSI Center", "id": "MSI.MSICenter", "detect": ["board:micro-star", "board:msi"] },
+      { "name": "GIGABYTE drivers & Control Center", "id": "GIGABYTE.Support", "url": "https://www.gigabyte.com/Support", "detect": ["board:gigabyte"] },
+      { "name": "ASRock drivers", "id": "ASRock.Support", "url": "https://www.asrock.com/support/index.asp", "detect": ["board:asrock"] }
+    ]},
+    { "name": "Peripherals", "programs": [
+      { "name": "Logitech G HUB", "id": "Logitech.GHUB" },
+      { "name": "Logitech Options+", "id": "Logitech.OptionsPlus" },
+      { "name": "Razer Synapse 4", "id": "RazerInc.RazerInstaller.Synapse4" },
+      { "name": "SteelSeries GG", "id": "SteelSeries.GG" },
+      { "name": "Corsair iCUE 5", "id": "Corsair.iCUE.5" },
+      { "name": "NZXT CAM", "id": "NZXT.CAM" }
+    ]},
+    { "name": "Everything else", "programs": [
+      { "name": "Snappy Driver Installer (LAN, audio, Wi-Fi...)", "id": "GlennDelahoy.SnappyDriverInstallerOrigin" },
+      { "name": "FanControl", "id": "Rem0o.FanControl" },
+      { "name": "OpenRGB", "id": "OpenRGB.OpenRGB" }
+    ]}
+  ]},
+  { "category": "Apps", "icon": "E71D", "groups": [
+    { "name": "Messaging", "programs": [
+      { "name": "Discord", "id": "Discord.Discord", "recommended": true },
+      { "name": "Telegram", "id": "Telegram.TelegramDesktop" },
+      { "name": "Signal", "id": "OpenWhisperSystems.Signal" },
+      { "name": "Zoom", "id": "Zoom.Zoom" },
+      { "name": "Microsoft Teams", "id": "Microsoft.Teams" },
+      { "name": "TeamSpeak 3", "id": "TeamSpeakSystems.TeamSpeakClient" }
+    ]},
+    { "name": "Media", "programs": [
+      { "name": "VLC", "id": "VideoLAN.VLC", "recommended": true },
+      { "name": "Spotify", "id": "Spotify.Spotify", "noAdmin": true },
+      { "name": "Audacity", "id": "Audacity.Audacity" },
+      { "name": "HandBrake", "id": "HandBrake.HandBrake" },
+      { "name": "GIMP", "id": "GIMP.GIMP.3" },
+      { "name": "Krita", "id": "KDE.Krita" },
+      { "name": "Inkscape", "id": "Inkscape.Inkscape" }
+    ]},
+    { "name": "Office", "programs": [
+      { "name": "LibreOffice", "id": "TheDocumentFoundation.LibreOffice" },
+      { "name": "Obsidian", "id": "Obsidian.Obsidian" },
+      { "name": "Notion", "id": "Notion.Notion" }
+    ]},
+    { "name": "Cloud & passwords", "programs": [
+      { "name": "Google Drive", "id": "Google.GoogleDrive" },
+      { "name": "Dropbox", "id": "Dropbox.Dropbox" },
+      { "name": "Bitwarden", "id": "Bitwarden.Bitwarden" },
+      { "name": "KeePassXC", "id": "KeePassXCTeam.KeePassXC" }
+    ]}
+  ]},
+  { "category": "Games", "icon": "E7FC", "groups": [
+    { "name": "Launchers", "programs": [
+      { "name": "Steam", "id": "Valve.Steam", "recommended": true },
+      { "name": "Epic Games Launcher", "id": "EpicGames.EpicGamesLauncher" },
+      { "name": "EA app", "id": "ElectronicArts.EADesktop" },
+      { "name": "Ubisoft Connect", "id": "Ubisoft.Connect" },
+      { "name": "GOG Galaxy", "id": "GOG.Galaxy" },
+      { "name": "Minecraft Launcher", "id": "Mojang.MinecraftLauncher" }
+    ]},
+    { "name": "Riot Games", "programs": [
+      { "name": "Valorant (EU)", "id": "RiotGames.Valorant.EU" },
+      { "name": "League of Legends (EUNE)", "id": "RiotGames.LeagueOfLegends.EUNE" },
+      { "name": "League of Legends (EUW)", "id": "RiotGames.LeagueOfLegends.EUW" }
+    ]},
+    { "name": "Competitive & anti-cheat", "programs": [
+      { "name": "FACEIT AC", "id": "FACEITLTD.FACEITAC" },
+      { "name": "FACEIT Client", "id": "FACEITLTD.FACEITClient" }
+    ]},
+    { "name": "Recording", "programs": [
+      { "name": "OBS Studio", "id": "OBSProject.OBSStudio" },
+      { "name": "ShareX", "id": "ShareX.ShareX" }
+    ]},
+    { "name": "Performance", "programs": [
+      { "name": "MSI Afterburner", "id": "Guru3D.Afterburner" },
+      { "name": "HWiNFO", "id": "REALiX.HWiNFO" },
+      { "name": "CPU-Z", "id": "CPUID.CPU-Z" },
+      { "name": "GPU-Z", "id": "TechPowerUp.GPU-Z" }
+    ]}
+  ]},
+  { "category": "Coding", "icon": "E943", "groups": [
+    { "name": "Editors & IDEs", "programs": [
+      { "name": "Visual Studio Code", "id": "Microsoft.VisualStudioCode" },
+      { "name": "Visual Studio 2022", "id": "Microsoft.VisualStudio.2022.Community" },
+      { "name": "Notepad++", "id": "Notepad++.Notepad++", "recommended": true },
+      { "name": "IntelliJ IDEA CE", "id": "JetBrains.IntelliJIDEA.Community" },
+      { "name": "PyCharm CE", "id": "JetBrains.PyCharm.Community" },
+      { "name": "Neovim", "id": "Neovim.Neovim" }
+    ]},
+    { "name": "Languages", "programs": [
+      { "name": "Python 3.13", "id": "Python.Python.3.13" },
+      { "name": "Node.js LTS", "id": "OpenJS.NodeJS.LTS" },
+      { "name": "Java JDK 21", "id": "Microsoft.OpenJDK.21" }
+    ]},
+    { "name": "Tools", "programs": [
+      { "name": "Git", "id": "Git.Git" },
+      { "name": "GitHub Desktop", "id": "GitHub.GitHubDesktop" },
+      { "name": "Windows Terminal", "id": "Microsoft.WindowsTerminal" },
+      { "name": "PowerShell 7", "id": "Microsoft.PowerShell" },
+      { "name": "Docker Desktop", "id": "Docker.DockerDesktop" },
+      { "name": "Postman", "id": "Postman.Postman" }
+    ]}
+  ]},
+  { "category": "System", "icon": "E90F", "groups": [
+    { "name": "Tools", "programs": [
+      { "name": "PowerToys", "id": "Microsoft.PowerToys" },
+      { "name": "AutoHotkey", "id": "AutoHotkey.AutoHotkey" },
+      { "name": "WizTree (disk space)", "id": "AntibodySoftware.WizTree" },
+      { "name": "qBittorrent", "id": "qBittorrent.qBittorrent" }
+    ]},
+    { "name": "Remote access", "programs": [
+      { "name": "TeamViewer", "id": "TeamViewer.TeamViewer" },
+      { "name": "AnyDesk", "id": "AnyDesk.AnyDesk" },
+      { "name": "WinSCP", "id": "WinSCP.WinSCP" },
+      { "name": "PuTTY", "id": "PuTTY.PuTTY" }
+    ]},
+    { "name": "Diagnostics", "programs": [
+      { "name": "CrystalDiskInfo", "id": "CrystalDewWorld.CrystalDiskInfo" },
+      { "name": "Process Explorer", "id": "Microsoft.Sysinternals.ProcessExplorer" },
+      { "name": "Malwarebytes", "id": "Malwarebytes.Malwarebytes" }
+    ]}
+  ]},
+  { "category": "Operating systems", "icon": "E770", "groups": [
+    { "name": "Windows", "programs": [
+      { "name": "Windows 11 (USB / ISO maker)", "id": "Microsoft.Windows11.MediaCreationTool",
+        "file": "https://go.microsoft.com/fwlink/?linkid=2156295", "url": "https://www.microsoft.com/software-download/windows11" },
+      { "name": "Windows 10 (USB / ISO maker)", "id": "Microsoft.Windows10.MediaCreationTool",
+        "file": "https://go.microsoft.com/fwlink/?LinkId=691209", "url": "https://www.microsoft.com/software-download/windows10" },
+      { "name": "Windows 11 Installation Assistant (upgrade)", "id": "Microsoft.Windows11.InstallationAssistant",
+        "file": "https://go.microsoft.com/fwlink/?linkid=2171764", "url": "https://www.microsoft.com/software-download/windows11" }
+    ]},
+    { "name": "Bootable USB", "programs": [
+      { "name": "Rufus", "id": "Rufus.Rufus" },
+      { "name": "Ventoy (many ISOs on one USB)", "id": "Ventoy.Ventoy" },
+      { "name": "balenaEtcher", "id": "Balena.Etcher" }
+    ]},
+    { "name": "Linux (ISO images)", "programs": [
+      { "name": "Ubuntu 26.04 LTS Desktop", "id": "Canonical.Ubuntu.ISO", "save": true,
+        "page": "https://releases.ubuntu.com/26.04/",
+        "find": ["href=\"(ubuntu-[\\d.]+-desktop-amd64\\.iso)\""],
+        "url": "https://ubuntu.com/download/desktop" },
+      { "name": "Linux Mint (Cinnamon)", "id": "LinuxMint.Cinnamon.ISO", "save": true,
+        "page": "https://mirrors.edge.kernel.org/linuxmint/stable/",
+        "find": ["href=\"(\\d+(?:\\.\\d+)?/)\"", "href=\"(linuxmint-[\\d.]+-cinnamon-64bit\\.iso)\""],
+        "url": "https://linuxmint.com/download.php" },
+      { "name": "Debian (netinst)", "id": "Debian.Netinst.ISO", "save": true,
+        "page": "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/",
+        "find": ["href=\"(debian-[\\d.]+-amd64-netinst\\.iso)\""],
+        "url": "https://www.debian.org/distrib/" },
+      { "name": "Arch Linux", "id": "ArchLinux.ISO", "save": true,
+        "file": "https://geo.mirror.pkgbuild.com/iso/latest/archlinux-x86_64.iso",
+        "url": "https://archlinux.org/download/" },
+      { "name": "Kali Linux (installer)", "id": "Kali.Installer.ISO", "save": true,
+        "page": "https://cdimage.kali.org/current/",
+        "find": ["href=\"(kali-linux-[\\d.]+-installer-amd64\\.iso)\""],
+        "url": "https://www.kali.org/get-kali/" }
+    ]}
+  ]}
+]

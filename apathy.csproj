@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    .NET Framework 4.8 is built into every Windows 10 and 11, so apathy.exe is one small file
+    that runs on a freshly installed system without installing any runtime first.
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>Apathy</RootNamespace>
+    <AssemblyName>apathy</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <Version>1.0.0</Version>
+    <Product>apathy</Product>
+    <DebugType>none</DebugType>
+    <!-- Lets the project build on Linux/macOS too (CI, cloud). -->
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Built-in program list; a programs.json next to the exe overrides it. -->
+    <EmbeddedResource Include="programs.json" LogicalName="programs.json" />
+    <Resource Include="app.ico" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+  </ItemGroup>
+
+</Project>
