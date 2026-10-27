@@ -118,10 +118,7 @@ It opens big enough to show every tab without scrolling, as far as the screen al
 The **Drivers** tab reads your hardware through WMI and shows it in the *This PC* box:
 
 ```
-Processor      AMD Ryzen 7 7800X3D 8-Core Processor
-Graphics card  NVIDIA GeForce RTX 4070 SUPER
-               AMD Radeon(TM) Graphics
-Motherboard    ASUSTeK COMPUTER INC. TUF GAMING B650-PLUS WIFI
+x
 ```
 
 **Select drivers for this PC** ticks every driver that matches, and those entries are marked
